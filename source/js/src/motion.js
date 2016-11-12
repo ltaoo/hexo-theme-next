@@ -98,10 +98,25 @@ $(document).ready(function () {
         })
         .on('sidebar.isHiding', function () {
         });
+      //点击文章区域#main隐藏侧边栏
+      var that = this;
+      $('#main').click(function (event) {
+        //console.log('click #main');
+        //如果是长按，就取消
+        if(event.toElement.className !== 'main') {
+          return;
+        }
+        that.clickHandler(event);
+        //console.log(event);
+      });
     },
-    clickHandler: function () {
+    //处理点击事件
+    clickHandler: function (event) {
+      console.log(this.isSidebarVisible);
       this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
+      //更新 sideBar 的状态
       this.isSidebarVisible = !this.isSidebarVisible;
+      event.stopPropagation();
     },
     mouseEnterHandler: function () {
       if (this.isSidebarVisible) {
@@ -156,6 +171,8 @@ $(document).ready(function () {
       this.sidebarEl.removeClass('sidebar-active');
       this.sidebarEl.trigger('sidebar.isHiding');
 
+      
+
       //在 post 页面下按下隐藏 sidebar 时如果当前选中的是“站点概览”，将 toc 去除 motion 效果
       //防止再次打开时会出现在“站点概览”下的 bug
       if (!!$('.post-toc-wrap')) {
@@ -165,6 +182,7 @@ $(document).ready(function () {
       }
     }
   };
+
   sidebarToggleMotion.init();
 
   NexT.motion.integrator = {

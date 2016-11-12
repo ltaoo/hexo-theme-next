@@ -11,7 +11,7 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="{{ config.language }}">
+<body lang="{{ config.language }}">
 
   {% include '_scripts/third-party/analytics.swig' %}
 
@@ -23,7 +23,7 @@
   <div class="{{ container_class }} {% block page_class %}{% endblock %} ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header">
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
 
